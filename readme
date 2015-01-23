@@ -1,0 +1,19 @@
+
+Installation:
+
+    git clone https://github.com/telltruth/acc_env.git ~/.acc_env
+
+Create symlinks:
+
+    ln -s ~/.acc_env/bashrc.local ~/.bashrc.local
+    ln -s ~/.acc_env/bashrc.color ~/.bashrc.color
+    ln -s ~/.acc_env/screenrc ~/.screenrc
+
+Condition treatment:
+
+    If git clone fail, do the command
+        
+        export GIT_SSL_NO_VERIFY=true 
+
+
+

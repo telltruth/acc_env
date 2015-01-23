@@ -1,0 +1,86 @@
+
+
+# Check for an interactive session
+[ -z "$PS1" ] && return
+
+GlobalEnvRCFiles=(
+    /etc/bashrc
+    /etc/bash_completion
+    /etc/bash.bashrc
+    ~/.bashrc.color
+    ~/.bashrc.buildenv
+)
+
+for each in ${GlobalEnvRCFiles[@]}; do
+    [ -r $each ] && . $each
+done
+
+
+function setup_ps1()
+{
+    local root="$txtred\u$txtrst"
+    local user="$txtred\u$txtrst"
+    #local host="$txtblu$1$txtrst"
+    #local host="$bldblu$1$txtrst"
+    local host="$bakblu$1$txtrst"
+    local rpwd="$txtgrn\w$txtrst"
+    local opwd="$txtgrn\W$txtrst"
+    local date= #"-$txtpur\t$txtrst-"
+    local at="$txtwht@$txtrst"
+    if [ "`id -u`" -eq 0 ]; then
+        PS1="\u@$HOSTNAME[\w]# "
+    else
+        PS1="${user}${at}${host}:${rpwd} ${date}\n\$ "
+    fi
+}
+
+alias t100='ssh allen@10.162.243.100'
+alias t171='ssh allen@10.162.243.171'
+alias t172='ssh allen@10.162.243.172'
+alias t175='ssh allen@10.162.243.175'
+alias t168='ssh allen@10.162.243.168'
+alias tra='ssh avct@10.162.246.8'
+alias temc='ssh emc@10.162.245.168'
+alias t101='ssh allen@10.162.243.101'
+alias tdt='ssh daily_test@10.162.243.171'
+alias thome='ssh dragon@123.204.186.223'
+alias ptt='ssh bbs@ptt.cc'
+
+
+#git
+alias gs='git status'
+alias gsn='git status --untracked-files=no'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit'
+alias gd='git diff'
+alias go="git checkout"
+alias gk='gitk --all&'
+alias gx='gitx --all'
+alias gl1='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --topo-order --graph --date=local'
+alias gl2='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --date-order --graph --date=local'
+alias gl1n='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --topo-order --graph --date=local --name-status'
+alias gl2n='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --date-order --graph --date=local --name-status'
+
+
+#screen
+alias sl='screen -ls'
+alias sr='screen -dr'
+
+if [ -f .git-completion.bash ]; then 
+  . .git-completion.bash
+fi 
+
+
+setup_ps1 $HOSTNAME
+
+case $TERM in
+    screen*)
+        # This is the escape sequence ESC k \w ESC
+        # Use current dir as the title
+        SCREENTITLE='\[\ek\W\e\\\]'
+        PS1="${SCREENTITLE}${PS1}"
+        ;;
+    *)
+        ;;
+esac
