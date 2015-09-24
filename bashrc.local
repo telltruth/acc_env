@@ -22,7 +22,7 @@ function setup_ps1()
     local user="$txtred\u$txtrst"
     #local host="$txtblu$1$txtrst"
     #local host="$bldblu$1$txtrst"
-    local host="$bakblu$1$txtrst"
+    local host="$bldcyn$1$txtrst"
     local rpwd="$txtgrn\w$txtrst"
     local opwd="$txtgrn\W$txtrst"
     local date= #"-$txtpur\t$txtrst-"
@@ -61,7 +61,7 @@ alias gl1='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgree
 alias gl2='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --date-order --graph --date=local'
 alias gl1n='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --topo-order --graph --date=local --name-status'
 alias gl2n='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --date-order --graph --date=local --name-status'
-
+alias gurl='git config --get remote.origin.url'
 
 #screen
 alias sl='screen -ls'
