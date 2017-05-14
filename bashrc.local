@@ -22,7 +22,7 @@ function setup_ps1()
     local user="$txtred\u$txtrst"
     #local host="$txtblu$1$txtrst"
     #local host="$bldblu$1$txtrst"
-    local host="$bldcyn$1$txtrst"
+    local host="$bakpur$1$txtrst"
     local rpwd="$txtgrn\w$txtrst"
     local opwd="$txtgrn\W$txtrst"
     local date= #"-$txtpur\t$txtrst-"
@@ -62,6 +62,17 @@ alias gl2='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgree
 alias gl1n='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --topo-order --graph --date=local --name-status'
 alias gl2n='git log --pretty=format:"%Cred%h%Creset(%an)%C(yellow)%d%Creset%Cgreen%ad%Creset:%s" --date-order --graph --date=local --name-status'
 alias gurl='git config --get remote.origin.url'
+alias dp='sudo docker ps -a'
+alias di='sudo docker images'
+alias dsda='dsda'
+alias dcl='dcl'
+
+function dsda() {
+    sudo docker start $1; sudo docker attach $1
+}
+function dcl() {
+    sudo docker images -a --no-trunc | head -n4 | grep -v "IMAGE ID" | awk '{ print $3 }' | xargs sudo docker inspect | grep Comment
+}
 
 #screen
 alias sl='screen -ls'
