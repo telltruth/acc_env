@@ -1,3 +1,7 @@
+# Define Encoding
+defencoding UTF-8
+encoding UTF-8 UTF-8
+
 startup_message off
 #termcapinfo xterm ti@:te@
 termcapinfo xterm* ti@:te@

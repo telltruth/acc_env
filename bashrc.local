@@ -15,22 +15,26 @@ for each in ${GlobalEnvRCFiles[@]}; do
     [ -r $each ] && . $each
 done
 
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
 
 function setup_ps1()
 {
     local root="$txtred\u$txtrst"
-    local user="$txtred\u$txtrst"
+    local user="$txtgrn\u$txtrst"
     #local host="$txtblu$1$txtrst"
     #local host="$bldblu$1$txtrst"
     local host="$bakpur$1$txtrst"
     local rpwd="$txtgrn\w$txtrst"
     local opwd="$txtgrn\W$txtrst"
-    local date= #"-$txtpur\t$txtrst-"
+    local date=" $txtpur\t$txtrst"
     local at="$txtwht@$txtrst"
+    local gb="$txtylw\$(parse_git_branch)$txtrst"
     if [ "`id -u`" -eq 0 ]; then
         PS1="\u@$HOSTNAME[\w]# "
     else
-        PS1="${user}${at}${host}:${rpwd} ${date}\n\$ "
+        PS1="${user}${at}${host}:${rpwd}${date}${gb}\n\$ "
     fi
 }
 
